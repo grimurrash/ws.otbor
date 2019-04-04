@@ -13,8 +13,19 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Auth::routes();
-
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware('auth')->group(function (){
+    Route::name('issues.')->prefix('issues')->group(function (){
+        Route::get('/new','IssueController@create')->name('new');
+        Route::post('/new','IssueController@store')->name('store');
+        Route::get('/list','IssueController@create')->name('list');
+    });
+    Route::middleware('admin')->name('admin.')->prefix('admin')->group(function (){
+        Route::get('/','AdminController@index')->name('index');
+    });
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,9 +50,23 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fio' => ['required', 'string', 'max:255', 'regex:/[А-Яа-я]+ [А-Яа-я]+ [А-Яа-я]+/u'],
+            'login'=>['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6' ,'confirmed'],
+            'treatment' =>['accepted']
+        ],[
+            'fio.required'=>'Введите Ф.И.О.',
+            'fio.regex'=>'Введите в формате: Фамилия Имя Отчетсво',
+            'login.required' =>"Введите Логин",
+            'email.required' =>"Введите E-Mail",
+            'email.unique'=>'Пользователь с таким E-Mail уже существует',
+            'login.unique'=>'Пользователь с таким Логином уже существует',
+            'login.email' =>"Не правильный формат E-Mail",
+            'password.required' =>"Введите пароль",
+            'password.confirmed' =>"Введённые пароли не совпадает",
+            'password.min' => 'Пароль должен состоять как минимум из 6 символов',
+            'treatment.accepted' =>'Для продолжения регистрации вы должны согласится на обработку персональных данных'
         ]);
     }
 
@@ -64,9 +79,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'fio'=>$data['fio'],
+            'login' => $data['login'],
+            'email'=>$data['email'],
+            'password' =>bcrypt($data['password']),
         ]);
     }
 }
