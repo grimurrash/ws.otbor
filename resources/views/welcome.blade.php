@@ -34,54 +34,23 @@
         <h2>Последние решенные проблемы</h2>
         <br>
         <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
+            @forelse($issues as $issue)
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail issue">
+                        <div class="photos">
+                            <img src="{{ $issue->startPhotoUrl() }}" alt="{{$issue->start_photo}}">
+                            @if(isset($issue->end_photo))
+                                <img src="{{ $issue->endPhotoUrl() }}" alt="{{$issue->end_photo}}">
+                            @endif
+                        </div>
+                        <h3 class="text-center"><a href="{{route('issues.show',$issue)}}">{{ $issue->title }}</a><span
+                                    class="label label-{{ $issue->getStatusColor() }} status">{{$issue->status}}</span>
+                        </h3>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="img/solve2.png" alt="Яма на дороге">
-                    <img src="img/problem2.png" alt="Яма на дороге">
-                </div>
-            </div>
+            @empty
+            @endforelse
         </div>
+        {{$issues->links()}}
     </div>
 @endsection

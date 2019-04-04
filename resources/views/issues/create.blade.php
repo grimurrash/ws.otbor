@@ -9,7 +9,8 @@
                 <div class="card ">
                     <div class="card-header" style="margin-bottom: 30px;"><h1>{{ __('Создание заявки') }}</h1></div>
                     <div class="card-body">
-                        <form id="form_register" enctype="multipart/form-data" method="POST" action="{{ route('issues.store') }}">
+                        <form id="form_register" enctype="multipart/form-data" method="POST"
+                              action="{{ route('issues.store') }}">
                             @csrf
                             <div class="form-group row">
                                 <label for="title"
@@ -69,7 +70,8 @@
 
                                 <div class="col-md-6">
                                     <input id="file" type="file"
-                                           class="form-control-file{{ $errors->has('image') ? ' is-invalid' : '' }}" value="{{ old('desc') }}"
+                                           class="form-control-file{{ $errors->has('image') ? ' is-invalid' : '' }}"
+                                           value="{{ old('desc') }}">
 
                                     @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">

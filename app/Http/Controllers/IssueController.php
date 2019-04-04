@@ -17,7 +17,8 @@ class IssueController extends Controller
      */
     public function index()
     {
-        //
+        $issues = Issue::orderBy('created_at','desc')->paginate(8);
+        return view('welcome',compact('issues'));
     }
 
     /**
@@ -83,7 +84,7 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        //
+        return view('issues.index',compact('issue'));
     }
 
     /**

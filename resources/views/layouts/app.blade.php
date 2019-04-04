@@ -43,7 +43,7 @@
                                 {{ Auth::user()->shortName() }}
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('issues.list')}}">Мои заявки</a></li>
+                                <li><a href="{{route('home')}}">Мои заявки</a></li>
                                 <li><a href="{{route('issues.new')}}">Новая заявка</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{route('logout')}}">Выход</a>

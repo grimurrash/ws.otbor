@@ -16,4 +16,8 @@ class User extends Authenticatable
         $nn = explode(' ', $this->fio);
         return $nn[0]." ".mb_substr($nn[1], 0, 1).".".mb_substr($nn[2], 0, 1).".";
     }
+
+    public function issues(){
+        return $this->hasMany(Issue::class);
+    }
 }
