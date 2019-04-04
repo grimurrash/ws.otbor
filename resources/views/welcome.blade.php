@@ -3,6 +3,13 @@
     <title>Улучши свой город</title>
 @endsection
 @section('content')
+    <div class="container">
+        @if (isset($message)))
+            <div class="alert alert-success" role="alert">
+                {{ $message }}
+            </div>
+        @endif
+    </div>
     <div class="jumbotron">
         <div class="container text-center">
             <h1>Привет, дорогой друг!</h1>

@@ -13,7 +13,7 @@
                 Увидел проблему? Дай нам знать о ней и мы ее решим!
             </p>
             <p>
-                <a class="btn btn-success btn-lg" href="{{route('new')}}" role="button">Сообщить о проблеме</a>
+                <a class="btn btn-success btn-lg" href="{{route('issues.new')}}" role="button">Сообщить о проблеме</a>
             </p>
         </div>
     </div>
