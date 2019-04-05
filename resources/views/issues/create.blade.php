@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title')
-    <title>Улучши свой город - Регистрация</title>
+    <title>Улучши свой город - Создание заявки</title>
 @endsection
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card ">
-                    <div class="card-header" style="margin-bottom: 30px;"><h1>{{ __('Создание заявки') }}</h1></div>
+                    <div class="card-header" style="margin-bottom: 30px;"><h1>{{ __('Сообщить о проблеме') }}</h1></div>
                     <div class="card-body">
                         <form id="form_register" enctype="multipart/form-data" method="POST"
                               action="{{ route('issues.store') }}">
@@ -31,9 +31,9 @@
                                 <label for="desc"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Описание') }}</label>
                                 <div class="col-md-6">
-                                    <input id="desc" type="text"
-                                           class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}"
-                                           name="desc" value="{{ old('desc') }}" autofocus>
+                                    <textarea id="desc" type="text"
+                                           class="form-control{{ $errors->has('desc') ? ' is-invalid' : '' }}"
+                                              name="desc" autofocus>{{ old('desc') }}</textarea>
 
                                     @if ($errors->has('desc'))
                                         <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                 <div class="col-md-6">
                                     <input id="file" name="image" type="file"
                                            class="form-control-file{{ $errors->has('image') ? ' is-invalid' : '' }}"
-                                           value="{{ old('desc') }}">
+                                           value="{{ old('image') }}">
 
                                     @if ($errors->has('image'))
                                         <span class="invalid-feedback" role="alert">

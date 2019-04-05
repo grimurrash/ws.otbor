@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.categories.index',compact('categories'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -35,7 +38,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = Validator::make($request->all(),[
+           'name' => ['required', 'string', 'unique:categories' ],
+        ],[
+            'name.required' => 'Введите название категории',
+            'name.unique' => 'Категория с таким названием уже существует'
+        ]);
+        if (!$valid->fails()){
+            Category::create([
+                'name'=>$request->name
+            ]);
+            Session::flash('message', 'Категория успешно создана');
+            return redirect()->route('admin.categories.index');
+        }else{
+           return redirect()->back()->withErrors($valid->errors())->withInput();
+        }
     }
 
     /**

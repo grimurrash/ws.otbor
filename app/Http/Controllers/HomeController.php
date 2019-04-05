@@ -23,12 +23,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (Auth::user()->isAdmin){
+        if (auth()->user()->isAdmin){
             return redirect()->route('admin.index');
         }else{
-            $issues = Auth::user()->issues;
+            if ($request->has('search')){
+                if ($request->search!= 'null'){
+                    $issues = auth()->user()->issues()->where('status',$request->search)->orderBy('status')->orderBy('created_at','desc')->paginate(8);
+                    $search = $request->search;
+                    return view('home',compact('issues','search'));
+                }
+            }
+            $issues = auth()->user()->issues()->orderBy('status')->orderBy('created_at','desc')->paginate(8);
             return view('home',compact('issues'));
         }
 

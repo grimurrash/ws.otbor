@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
             'email'=>'rashit.sabirov@bk.ru',
             'password' =>bcrypt('75987687'),
         ]);
+        \App\User::create([
+            'fio'=>"админ админ админ",
+            'login' => 'admin',
+            'email'=>'rashit.sabirov1999@bk.ru',
+            'password' =>bcrypt('adminWSR'),
+        ]);
         \App\Category::create([
             'name'=>'Стандарт'
         ]);

@@ -28,7 +28,7 @@ class Issue extends Model
     }
     public function timer()
     {
-        $now = date('d.m.Y H:i');
+        $now = now();
         $created_at = date($this->created_at);
         $now = date_create($now);
         $created_at = date_create($created_at);
@@ -44,7 +44,10 @@ class Issue extends Model
             $format .= '%h часов ';
         }
         if ($timer->i > 0){
-            $format .= '%i минут';
+            $format .= '%i минут ';
+        }
+        if ($timer->s > 0){
+            $format .= '%s секунд';
         }
         return $timer->format($format);
 

@@ -4,9 +4,14 @@
 @endsection
 @section('content')
     <div class="container">
-        @if (isset($message)))
+        @if (Session::has('message'))
             <div class="alert alert-success" role="alert">
-                {{ $message }}
+                {{ Session::get('message') }}
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ Session::get('error') }}
             </div>
         @endif
     </div>
@@ -31,6 +36,32 @@
         </div>
     </div>
     <div class="container">
+        <h2>Статистика портала</h2>
+        <br>
+        <ul class="list-group col-sm-6 col-md-5">
+            <li class="list-group-item">
+                <span class="badge">{{$info['user_count']}}</span>
+                Всего пользователей
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{$info['issues_count']}}</span>
+                Всего заявок
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{$info['new_count']}}</span>
+                Новых заявок
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{$info['success_count']}}</span>
+                Решенных заявок
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{$info['danger_count']}}</span>
+                Заявок отклонено
+            </li>
+        </ul>
+    </div>
+    <div class="container">
         <h2>Последние решенные проблемы</h2>
         <br>
         <div class="row">
@@ -45,13 +76,13 @@
                             {{--<img src="{{ $issue->endPhotoUrl() }}" alt="{{$issue->end_photo}}">--}}
                             {{--@endif--}}
                         </div>
-                        <h3 class="text-center"><a href="{{route('issues.show',$issue)}}">{{ $issue->title }}</a><span
-                                    class="label label-{{ $issue->getStatusColor() }} status">{{$issue->status}}</span>
-                        </h3>
-                        <div class="footer">
+                        <h3 class="text-center">  <a  href="{{route('issues.show',$issue)}}">{{ $issue->title }}</a></h3>
+                        <div class="info">
                             <span>Дата создания: <b>{{ $issue->date() }}</b></span>
                             <span>Время с момента создания: <b>{{ $issue->timer() }}</b></span>
                             <span>Категория: <b>{{ $issue->category->name }}</b></span>
+                            <span style="font-size: 16px;" class="label label-{{ $issue->getStatusColor() }} status">{{$issue->status}}
+                            </span>
                         </div>
                     </div>
 

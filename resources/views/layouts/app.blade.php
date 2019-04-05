@@ -46,11 +46,13 @@
                             <ul class="dropdown-menu">
                                 @if(Auth::user()->isAdmin)
                                     <li><a href="{{route('admin.index')}}">Все заявки</a></li>
+                                    <li><a href="{{route('issues.new')}}">Новая заявка</a></li>
+                                    <li><a href="{{route('admin.categories.index')}}">Все категории</a></li>
+                                    <li><a href="{{route('admin.categories.create')}}">Добавить категорию</a></li>
                                 @else
                                     <li><a href="{{route('home')}}">Мои заявки</a></li>
+                                    <li><a href="{{route('issues.new')}}">Новая заявка</a></li>
                                 @endif
-
-                                <li><a href="{{route('issues.new')}}">Новая заявка</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{route('logout')}}">Выход</a>
                             </ul>

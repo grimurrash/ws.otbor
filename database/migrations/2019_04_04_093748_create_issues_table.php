@@ -18,12 +18,13 @@ class CreateIssuesTable extends Migration
             $table->string('title');
             $table->text('desc');
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('start_photo');
             $table->string('end_photo')->nullable();
             $table->enum('status',['Новая','Решена','Отклонена'])->default('Новая');
+            $table->string('admin_message')->nullable();
             $table->timestamps();
         });
         \Illuminate\Support\Facades\Artisan::call('db:seed');
