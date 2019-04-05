@@ -69,7 +69,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Изображение') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="file" type="file"
+                                    <input id="file" name="image" type="file"
                                            class="form-control-file{{ $errors->has('image') ? ' is-invalid' : '' }}"
                                            value="{{ old('desc') }}">
 

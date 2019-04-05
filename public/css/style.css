@@ -4,11 +4,14 @@
  }
 .photos img{
     width: 100%;
+    border-bottom: 1px solid #cccccc;
 }
 .issue .footer{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding: 10px;
+    border-top: 1px solid #cccccc;
 }
 .issue .status{
      padding: 5px 10px;

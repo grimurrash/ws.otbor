@@ -38,12 +38,18 @@
                     @endguest
                     @auth()
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
                                aria-expanded="false">
                                 {{ Auth::user()->shortName() }}
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('home')}}">Мои заявки</a></li>
+                                @if(Auth::user()->isAdmin)
+                                    <li><a href="{{route('admin.index')}}">Все заявки</a></li>
+                                @else
+                                    <li><a href="{{route('home')}}">Мои заявки</a></li>
+                                @endif
+
                                 <li><a href="{{route('issues.new')}}">Новая заявка</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{route('logout')}}">Выход</a>

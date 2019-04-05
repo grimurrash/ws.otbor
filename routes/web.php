@@ -15,7 +15,7 @@ Route::get('/', 'IssueController@index')->name('index');
 
 Auth::routes();
 Route::get('/logout','Auth\LoginController@logout')->name('logout');
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::middleware('auth')->group(function (){
     Route::name('issues.')->prefix('issues')->group(function (){
@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function (){
         Route::get('/{issue}','IssueController@show')->name('show');
     });
     Route::middleware('admin')->name('admin.')->prefix('admin')->group(function (){
-        Route::get('/','AdminController@index')->name('index');
+        Route::get('/home','AdminController@index')->name('index');
     });
+    Route::get('/home', 'HomeController@index')->name('home');
 });
